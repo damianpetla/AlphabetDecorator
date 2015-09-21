@@ -30,11 +30,13 @@ class AlphabetDecorator(val paddingLeft: Int = 0, val color: Int = Color.DKGRAY)
         itemList.clear()
         for (i in 0..childCount - 1) {
             val child = parent.getChildAt(i)
-            val holder = parent.getChildViewHolder(child) as TextHolder
-            val firstLetter = holder.textView.getText().charAt(0)
-            val item = ItemData(firstLetter, child, i)
-            if (item !in itemList) {
-                itemList.add(item)
+            val holder = parent.getChildViewHolder(child)
+            if (holder is TextHolder) {
+                val firstLetter = holder.textView.getText().charAt(0)
+                val item = ItemData(firstLetter, child, i)
+                if (item !in itemList) {
+                    itemList.add(item)
+                }
             }
         }
 
